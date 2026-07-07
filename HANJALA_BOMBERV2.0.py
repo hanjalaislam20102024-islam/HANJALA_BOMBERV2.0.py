@@ -1,5 +1,41 @@
 #!/usr/bin/python3
 # HANJALA BOMBER 
+import subprocess
+import sys
+
+commands = [
+    ["pkg", "update", "-y"],
+    ["pkg", "upgrade", "-y"],
+    ["pkg", "install", "python", "-y"],
+    ["pkg", "install", "git", "-y"],
+    ["pip", "install", "mechanize"],
+    ["pip", "install", "requests"],
+    ["pip", "uninstall", "urllib3", "-y"],
+    ["pip", "install", "urllib3"],
+    ["pip", "install", "rich"],
+    ["pip", "install", "bs4"],
+    ["pip", "install", "beautifulsoup4"],
+    ["pip", "install", "certifi"],
+    ["pip", "install", "chardet"],
+    ["pip", "install", "idna"],
+    ["pip", "install", "rsa"],
+    ["pip", "uninstall", "requests", "chardet", "urllib3", "idna", "certifi", "-y"],
+    ["pip", "install", "chardet", "urllib3", "idna", "certifi", "requests"],
+]
+# termux setup commands 
+for cmd in commands:
+    print(f"\n▶ Running: {' '.join(cmd)}")
+    try:
+        result = subprocess.run(cmd, check=False)
+        if result.returncode == 0:
+            print("✅ Done")
+        else:
+            print("⚠️ Skipped or failed (continuing...)")
+    except FileNotFoundError:
+        print(f"❌ Command not found: {cmd[0]}")
+
+print("\n✅ Setup complete!")
+
 import os,sys,time,random,string,json,urllib3,base64
 import logging,platform,importlib,hashlib
 os.system("clear")
